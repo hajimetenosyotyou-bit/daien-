@@ -1,0 +1,24 @@
+🚀 script start
+➡️ go login page
+✏️ fill login
+🔐 submit login
+⏳ wait login
+➡️ go dashboard
+📊 collect all "回" numbers
+all 回 values: [ '1,187回', '185回' ]
+✅ views: 1187
+✅ actions: 185
+✅ calls: null
+✅ directions: null
+📦 data: {
+  date: '2026-02-10',
+  store_id: '76262',
+  views: 1187,
+  actions: 185,
+  calls: null,
+  directions: null
+}
+📡 GAS response: 200 ok
+🕒 wait before close
+❌ closing browser
+🏁 script end
