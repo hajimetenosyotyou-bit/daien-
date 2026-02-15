@@ -29,4 +29,16 @@ jobs:
           MEO_LOGIN_ID: ${{ secrets.MEO_LOGIN_ID }}
           MEO_PASSWORD: ${{ secrets.MEO_PASSWORD }}
           GAS_URL: ${{ secrets.GAS_URL }}
-        run: node meo.js
+        run: |
+          set -euxo pipefail
+          node -v
+          ls -la
+          node meo.js 2>&1 | tee run.log
+
+      - name: Upload run log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-log
+          path: run.log
+
