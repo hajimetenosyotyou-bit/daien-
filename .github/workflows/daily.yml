@@ -1,0 +1,29 @@
+name: Daily MEO
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 毎日 9:00 JST（UTC 0:00）
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run script
+        env:
+          MEO_LOGIN_ID: ${{ secrets.MEO_LOGIN_ID }}
+          MEO_PASSWORD: ${{ secrets.MEO_PASSWORD }}
+          GAS_URL: ${{ secrets.GAS_URL }}
+        run: node meo.js
