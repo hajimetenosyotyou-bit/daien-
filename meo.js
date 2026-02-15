@@ -1,4 +1,7 @@
 
+require("dotenv").config();
+
+
 const LOGIN_ID = process.env.MEO_LOGIN_ID;
 const PASSWORD = process.env.MEO_PASSWORD;
 const GAS_URL  = process.env.GAS_URL;
@@ -9,17 +12,18 @@ if (!LOGIN_ID || !PASSWORD || !GAS_URL) {
 
 
 
-const { chromium } = require('playwright');
+const { chromium } = require("playwright");
 
 (async () => {
   try {
-    console.log('🚀 script start');
+    console.log("🚀 script start");
 
-    // ========= 起動 =========
     const browser = await chromium.launch({
-      headless: false,
-      slowMo: 100
+      headless: process.env.CI === "true", // ← Actionsでは true
+      slowMo: process.env.CI === "true" ? 0 : 100
     });
+    // ...
+
     const context = await browser.newContext();
     const page = await context.newPage();
 
